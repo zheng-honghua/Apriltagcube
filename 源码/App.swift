@@ -431,8 +431,12 @@ struct Editor: View {
     private func runExport(_ settings: Settings, to url: URL) {
         DispatchQueue.global(qos: .userInitiated).async {
             let outcome = Result {
-                let python = FileManager.default.homeDirectoryForCurrentUser
+                let installedPython = FileManager.default.homeDirectoryForCurrentUser
                     .appendingPathComponent("Library/Application Support/AprilTagCube/runtime/bin/python")
+                let bundledPython = Bundle.main.resourceURL?.appendingPathComponent("runtime/bin/python3.13")
+                let python = bundledPython.flatMap {
+                    FileManager.default.isExecutableFile(atPath: $0.path) ? $0 : nil
+                } ?? installedPython
                 guard FileManager.default.isExecutableFile(atPath: python.path),
                       let script = Bundle.main.url(forResource: "exporter", withExtension: "py") else {
                     throw ExportFailure(message: "找不到 CAD 运行环境，请运行源码文件夹中的安装脚本。")
@@ -442,7 +446,7 @@ struct Editor: View {
                 let errors = Pipe()
                 let data = try JSONEncoder().encode(settings)
                 process.executableURL = python
-                process.arguments = ["-B", script.path, url.path]
+                process.arguments = ["-I", "-B", script.path, url.path]
                 process.standardInput = input
                 process.standardOutput = FileHandle.nullDevice
                 process.standardError = errors

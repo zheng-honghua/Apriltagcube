@@ -4,7 +4,7 @@
 
 ## Windows 版
 
-从 [Windows 下载页](https://github.com/zheng-honghua/Apriltagcube/releases/tag/v1.1.0-windows) 下载 `AprilTagCube-Windows-x64.zip`，完整解压后打开 `AprilTagCube.exe`。压缩包包含 Python 和 CAD 运行库，运行时无需另外安装。Windows 11 ARM64 可通过 x64 模拟运行。
+从 [下载页](https://github.com/zheng-honghua/Apriltagcube/releases/tag/v1.1.0) 下载 `AprilTagCube-Windows-x64.zip`，完整解压后打开 `AprilTagCube.exe`。压缩包包含 Python 和 CAD 运行库，运行时无需另外安装。Windows 11 ARM64 可通过 x64 模拟运行。
 
 从源码构建时，使用带 Tcl/Tk 的 Windows x64 Python 3.13，在仓库根目录执行以下命令。
 
@@ -15,15 +15,19 @@ python .\源码\build_windows.py
 
 生成程序位于 `dist/AprilTagCube/`。
 
-## macOS 构建与运行
+## macOS 版
 
-需要 macOS 14 或以上、Xcode Command Line Tools 和 [uv](https://docs.astral.sh/uv/getting-started/installation/)。在终端进入仓库目录后运行：
+从 [下载页](https://github.com/zheng-honghua/Apriltagcube/releases/tag/v1.1.0) 下载 `AprilTagCube-macOS-arm64.zip`，解压后打开 `AprilTag方块.app`。适用于 Apple 芯片及 macOS 14 或以上。应用内置导出依赖，采用临时签名，尚未经过 Apple 公证。
+
+源码构建需要 Xcode Command Line Tools 和 [uv](https://docs.astral.sh/uv/getting-started/installation/)。在终端进入仓库目录后运行：
 
 ```sh
 ./源码/安装与构建.command
 ```
 
 脚本会在当前用户的 Application Support 目录安装 Python 3.13 和 Open CASCADE 运行环境（如果尚未安装），并在仓库根目录生成 `AprilTag方块.app`。双击打开即可。
+
+使用 `./源码/安装与构建.command --portable` 可在 `dist/macos/` 生成自带运行库的应用。
 
 ## 导出和打印
 

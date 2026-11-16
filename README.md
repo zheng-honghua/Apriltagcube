@@ -1,8 +1,21 @@
 # AprilTag 方块
 
-在 macOS 上生成带 AprilTag 的方块。可按毫米设置方块边长、码图边长和黑色嵌件的深度，给六个面分别选择 ID，并拖动查看三维预览。支持 `tag36h11` 和 `tagStandard41h12`。
+在 macOS 和 Windows 上生成带 AprilTag 的方块。可按毫米设置方块边长、码图边长和黑色嵌件的深度，给六个面分别选择 ID，并拖动查看三维预览。支持 `tag36h11` 和 `tagStandard41h12`。
 
-## 构建与运行
+## Windows 版
+
+从 [Windows 下载页](https://github.com/zheng-honghua/Apriltagcube/releases/tag/v1.1.0-windows) 下载 `AprilTagCube-Windows-x64.zip`，完整解压后打开 `AprilTagCube.exe`。压缩包包含 Python 和 CAD 运行库，运行时无需另外安装。Windows 11 ARM64 可通过 x64 模拟运行。
+
+从源码构建时，使用带 Tcl/Tk 的 Windows x64 Python 3.13，在仓库根目录执行以下命令。
+
+```powershell
+python -m pip install -r .\源码\windows-requirements.txt
+python .\源码\build_windows.py
+```
+
+生成程序位于 `dist/AprilTagCube/`。
+
+## macOS 构建与运行
 
 需要 macOS 14 或以上、Xcode Command Line Tools 和 [uv](https://docs.astral.sh/uv/getting-started/installation/)。在终端进入仓库目录后运行：
 

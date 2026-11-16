@@ -1,0 +1,2 @@
+cadquery-ocp-novtk==8.0.1.1.0
+pyinstaller==6.22.3

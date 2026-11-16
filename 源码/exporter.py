@@ -280,15 +280,17 @@ def save_3mf(path, base, inserts, cube):
                 archive.writestr(filename, XML.tostring(xml, encoding="utf-8", xml_declaration=True))
 
 
+def export_model(settings, path):
+    base, inserts = build(settings)
+    if path.suffix.lower() == ".3mf":
+        save_3mf(path, base, inserts, float(settings["cube"]))
+    else:
+        save(path, base, inserts)
+
+
 if __name__ == "__main__":
     try:
-        path = Path(sys.argv[1])
-        settings = json.load(sys.stdin)
-        base, inserts = build(settings)
-        if path.suffix.lower() == ".3mf":
-            save_3mf(path, base, inserts, float(settings["cube"]))
-        else:
-            save(path, base, inserts)
+        export_model(json.load(sys.stdin), Path(sys.argv[1]))
     except (ValueError, RuntimeError, OSError, KeyError, TypeError) as error:
         print(error, file=sys.stderr)
         sys.exit(1)
